@@ -3,40 +3,56 @@ import { Building2, Calendar } from "lucide-react";
 
 const experiences = [
   {
-    company: "Condati",
-    role: "Senior Fullstack Developer",
-    period: "Atual",
-    description: "Desenvolvimento de plataforma AI-powered de Marketing Analytics-as-a-Service. Stack: React, Node.js, TypeScript.",
+    company: "Senac Minas",
+    role: "Docente em Tecnologia da Informação",
+    period: "Mar 2025 - Atual",
+    description: "Desenvolvimento de plataforma AI-powered de Marketing Analytics-as-a-Service utilizando React, Node.js, TypeScript, PostgreSQL, AWS e Docker. Implementação de arquitetura escalável e integração com múltiplas APIs de marketing.",
     current: true,
   },
   {
-    company: "Authority Partners",
-    role: "Senior Software Developer",
-    period: "Anterior",
-    description: "Desenvolvimento de plataformas web para aplicações de mortgage. Foco em .NET Core e Angular.",
+    company: "RN Tech solutions",
+    role: "Consultor de Software",
+    period: "Ago 2017 - Atual",
+    description: "Desenvolvimento de plataformas web para aplicações de mortgage utilizando .NET Core 6, Angular 14+, PostgreSQL e Azure DevOps. Implementação de soluções robustas e escaláveis para o setor financeiro.",
+    current: true,
+  },
+  {
+    company: "Braszil Sistem",
+    role: "Front-end Developer",
+    period: "Jan 2022 - Jul 2022",
+    description: "Consultoria de desenvolvimento para cliente MEO (Telecom). Trabalho com .NET Core 3.1, Angular 12, SQL Server, Azure e metodologias ágeis (Scrum). Desenvolvimento de soluções enterprise de alta disponibilidade.",
     current: false,
   },
   {
-    company: "DELLENT Consulting",
-    role: "Senior .NET Developer",
-    period: "Anterior",
-    description: "Consultoria de desenvolvimento de software para cliente MEO. Arquitetura e desenvolvimento de soluções enterprise.",
+    company: "Quantico Solutions S.A",
+    role: "Desenvolvedor Full Stack",
+    period: "Jan 2023 - Ago 2023",
+    description: "Manutenção e evolução de sistemas WEB utilizando React, .NET Core, SQL Server e Azure DevOps. Implementação de melhorias de performance e novas funcionalidades em sistemas legados.",
+    current: false,
+  },
+    {
+    company: "B4A – Beauty For All – Front-end Developer",
+    role: "Desenvolvedor Front-end",
+    period: "Jan 2021 - Dez 2023",
+    description: "Desenvolvimento de soluções ERP de grande escala utilizando .NET Framework, ASP.NET MVC, SQL Server e JavaScript. Experiência com sistemas de alta disponibilidade e integração com múltiplos módulos empresariais.",
     current: false,
   },
   {
-    company: "ION Sistemas",
-    role: "Senior FullStack Developer",
-    period: "Anterior",
-    description: "Manutenção e evolução dos sistemas WEB da empresa. Stack diversificada incluindo React e .NET.",
+    company: "Luby Software",
+    role: "Desenvolvedor JavaScript",
+    period: "Jan 2021 - Dez 2021",
+    description: "Desenvolvimento de soluções ERP de grande escala utilizando .NET Framework, ASP.NET MVC, SQL Server e JavaScript. Experiência com sistemas de alta disponibilidade e integração com múltiplos módulos empresariais.",
     current: false,
   },
-  {
-    company: "TOTVS",
-    role: "FullStack Developer",
-    period: "Anterior",
-    description: "Desenvolvimento de soluções empresariais de grande escala. Experiência com sistemas de alta disponibilidade.",
+    {
+    company: "Hospital das Clínicas Samuel Libânio ",
+    role: "Programador / Operador de TI|",
+    period: "Jan 2019 - Dez 2021",
+    description: "Desenvolvimento de soluções ERP de grande escala utilizando .NET Framework, ASP.NET MVC, SQL Server e JavaScript. Experiência com sistemas de alta disponibilidade e integração com múltiplos módulos empresariais.",
     current: false,
   },
+
+
 ];
 
 const Experience = () => {

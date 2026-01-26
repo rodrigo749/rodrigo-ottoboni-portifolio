@@ -55,7 +55,7 @@ const Contact = () => {
             </a>
 
             <a
-              href="https://github.com"
+              href="https://github.com/rodrigo749"
               target="_blank"
               rel="noopener noreferrer"
               className="flex flex-col items-center p-6 rounded-xl bg-secondary/50 hover:bg-secondary transition-colors group"

@@ -1,8 +1,30 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/hooks/useLanguage";
+import logoFinal from "@/assets/logo final redonda.jpeg";
+
+// Componente de bandeira do Brasil
+const BrazilFlag = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+    <rect fill="#009B3A" width="512" height="512" rx="64"/>
+    <polygon fill="#FEDF00" points="256,88 456,256 256,424 56,256"/>
+    <circle fill="#002776" cx="256" cy="256" r="88"/>
+    <path fill="#FFFFFF" d="M168,248 Q256,208 344,248 Q256,288 168,248" opacity="0.9"/>
+  </svg>
+);
+
+// Componente de bandeira do Reino Unido
+const UKFlag = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+    <rect fill="#012169" width="512" height="512" rx="64"/>
+    <path fill="#FFFFFF" d="M0,0 L512,512 M512,0 L0,512" stroke="#FFFFFF" strokeWidth="80"/>
+    <path fill="#C8102E" d="M0,0 L512,512 M512,0 L0,512" stroke="#C8102E" strokeWidth="52"/>
+    <path fill="#FFFFFF" d="M256,0 V512 M0,256 H512" stroke="#FFFFFF" strokeWidth="100"/>
+    <path fill="#C8102E" d="M256,0 V512 M0,256 H512" stroke="#C8102E" strokeWidth="60"/>
+  </svg>
+);
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -45,8 +67,12 @@ const Header = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
-        <a href="#" className="text-xl font-bold text-gradient">
-          ROD
+        <a href="#" className="flex items-center">
+          <img 
+            src={logoFinal} 
+            alt="Rodrigo Ottoboni Logo" 
+            className="h-10 w-10 rounded-full object-cover"
+          />
         </a>
 
         {/* Desktop nav */}
@@ -64,10 +90,15 @@ const Header = () => {
             variant="ghost"
             size="sm"
             onClick={toggleLanguage}
-            className="flex items-center gap-2 hover:bg-secondary"
+            className="flex items-center gap-2 hover:bg-secondary px-3"
+            title={language === "pt" ? "Switch to English" : "Mudar para Português"}
           >
-            <Globe className="h-4 w-4" />
-            <span className="font-medium">{language === "pt" ? "EN" : "PT"}</span>
+            {language === "pt" ? (
+              <UKFlag className="h-5 w-5 rounded-sm" />
+            ) : (
+              <BrazilFlag className="h-5 w-5 rounded-sm" />
+            )}
+            <span className="font-medium text-xs">{language === "pt" ? "EN" : "PT"}</span>
           </Button>
           <Button
             size="sm"
@@ -84,10 +115,14 @@ const Header = () => {
             variant="ghost"
             size="sm"
             onClick={toggleLanguage}
-            className="flex items-center gap-1 hover:bg-secondary"
+            className="flex items-center gap-1 hover:bg-secondary px-2"
+            title={language === "pt" ? "Switch to English" : "Mudar para Português"}
           >
-            <Globe className="h-4 w-4" />
-            <span className="text-xs font-medium">{language === "pt" ? "EN" : "PT"}</span>
+            {language === "pt" ? (
+              <UKFlag className="h-5 w-5 rounded-sm" />
+            ) : (
+              <BrazilFlag className="h-5 w-5 rounded-sm" />
+            )}
           </Button>
           <button
             className="p-2"

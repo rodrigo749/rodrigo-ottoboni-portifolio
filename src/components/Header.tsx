@@ -66,8 +66,8 @@ const Header = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
-        <a href="#" className="flex items-center">
+      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+        <a href="#" className="flex items-center flex-shrink-0">
           <img 
             src={logoFinal} 
             alt="Rodrigo Ottoboni Logo" 
@@ -76,7 +76,7 @@ const Header = () => {
         </a>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center justify-center flex-1 gap-6 mx-8">
           {navItems.map((item) => (
             <button
               key={item.label}
@@ -86,6 +86,10 @@ const Header = () => {
               {item.label}
             </button>
           ))}
+        </nav>
+
+        {/* Right side buttons */}
+        <div className="hidden md:flex items-center gap-3 flex-shrink-0">
           <Button
             variant="ghost"
             size="sm"
@@ -107,7 +111,7 @@ const Header = () => {
           >
             {t.nav.contact}
           </Button>
-        </nav>
+        </div>
 
         {/* Mobile menu button */}
         <div className="md:hidden flex items-center gap-2">

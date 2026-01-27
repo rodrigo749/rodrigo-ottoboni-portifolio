@@ -1,8 +1,81 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Github, Send } from "lucide-react";
+import { Mail, Linkedin, Github, Send, Loader2, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+
+interface ContactForm {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
 
 const Contact = () => {
+  const [formData, setFormData] = useState<ContactForm>({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { toast } = useToast();
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.name || !formData.email || !formData.message) {
+      toast({
+        title: "Campos obrigatórios",
+        description: "Por favor, preencha todos os campos obrigatórios.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      await addDoc(collection(db, "messages"), {
+        ...formData,
+        createdAt: serverTimestamp(),
+        read: false,
+      });
+
+      setIsSubmitted(true);
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      
+      toast({
+        title: "Mensagem enviada!",
+        description: "Obrigado pelo contato. Responderei em breve!",
+      });
+
+      // Reset success state after 3 seconds
+      setTimeout(() => setIsSubmitted(false), 3000);
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast({
+        title: "Erro ao enviar",
+        description: "Ocorreu um erro ao enviar sua mensagem. Tente novamente.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <section id="contact" className="py-24 px-4 bg-gradient-card">
       <div className="max-w-4xl mx-auto">
@@ -68,18 +141,89 @@ const Contact = () => {
             </a>
           </div>
 
-          <div className="mt-10 text-center">
-            <Button
-              size="lg"
-              className="bg-gradient-primary hover:opacity-90 transition-opacity glow-primary"
-              asChild
-            >
-              <a href="mailto:contato@rodrigoottoboni.dev">
-                <Send className="mr-2 h-4 w-4" />
-                Enviar mensagem
-              </a>
-            </Button>
-          </div>
+          {/* Contact Form */}
+          <form onSubmit={handleSubmit} className="mt-10 space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="name">Nome *</Label>
+                <Input
+                  id="name"
+                  name="name"
+                  placeholder="Seu nome"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  disabled={isSubmitting}
+                  className="bg-secondary/50 border-border"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="email">Email *</Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="seu@email.com"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  disabled={isSubmitting}
+                  className="bg-secondary/50 border-border"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="subject">Assunto</Label>
+              <Input
+                id="subject"
+                name="subject"
+                placeholder="Qual o assunto?"
+                value={formData.subject}
+                onChange={handleInputChange}
+                disabled={isSubmitting}
+                className="bg-secondary/50 border-border"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="message">Mensagem *</Label>
+              <Textarea
+                id="message"
+                name="message"
+                placeholder="Escreva sua mensagem aqui..."
+                rows={5}
+                value={formData.message}
+                onChange={handleInputChange}
+                disabled={isSubmitting}
+                className="bg-secondary/50 border-border resize-none"
+              />
+            </div>
+
+            <div className="text-center">
+              <Button
+                type="submit"
+                size="lg"
+                disabled={isSubmitting || isSubmitted}
+                className="bg-gradient-primary hover:opacity-90 transition-opacity glow-primary min-w-[200px]"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Enviando...
+                  </>
+                ) : isSubmitted ? (
+                  <>
+                    <CheckCircle className="mr-2 h-4 w-4" />
+                    Enviado!
+                  </>
+                ) : (
+                  <>
+                    <Send className="mr-2 h-4 w-4" />
+                    Enviar mensagem
+                  </>
+                )}
+              </Button>
+            </div>
+          </form>
         </motion.div>
       </div>
     </section>

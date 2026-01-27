@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useLanguage } from "@/hooks/useLanguage";
 
 const skillCategories = [
   {
@@ -44,6 +45,8 @@ const skillCategories = [
 ];
 
 const Skills = () => {
+  const { t } = useLanguage();
+  
   return (
     <section id="skills" className="py-24 px-4 bg-gradient-card">
       <div className="max-w-6xl mx-auto">
@@ -55,10 +58,10 @@ const Skills = () => {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Minhas <span className="text-gradient">Tecnologias</span>
+            {t.skills.title} <span className="text-gradient">{t.skills.titleHighlight}</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Stack tecnológico diversificado para entregar soluções completas e robustas.
+            {t.skills.subtitle}
           </p>
         </motion.div>
 

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Building2, Calendar } from "lucide-react";
+import { useLanguage } from "@/hooks/useLanguage";
 
 const experiences = [
   {
@@ -19,7 +20,7 @@ const experiences = [
   {
     company: "Braszil Sistem",
     role: "Front-end Developer",
-    period: "Jan 2022 - Jul 2022",
+    period: "Jan 2024 - Dez 2024",
     description: "Consultoria de desenvolvimento para cliente MEO (Telecom). Trabalho com .NET Core 3.1, Angular 12, SQL Server, Azure e metodologias ágeis (Scrum). Desenvolvimento de soluções enterprise de alta disponibilidade.",
     current: false,
   },
@@ -56,6 +57,8 @@ const experiences = [
 ];
 
 const Experience = () => {
+  const { t } = useLanguage();
+  
   return (
     <section id="experience" className="py-24 px-4">
       <div className="max-w-4xl mx-auto">
@@ -67,10 +70,10 @@ const Experience = () => {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Experiência <span className="text-gradient">Profissional</span>
+            {t.experience.title} <span className="text-gradient">{t.experience.titleHighlight}</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Uma trajetória de crescimento e contribuições significativas em empresas de tecnologia.
+            {t.experience.subtitle}
           </p>
         </motion.div>
 

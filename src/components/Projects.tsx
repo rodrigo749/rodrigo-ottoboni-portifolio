@@ -1,52 +1,55 @@
 import { motion } from "framer-motion";
 import { ExternalLink, Github, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/hooks/useLanguage";
 
 import projectAnalytics from "@/assets/project-analytics.jpg";
 import projectFintech from "@/assets/project-fintech.jpg";
 import projectTelecom from "@/assets/project-telecom.jpg";
 import projectEcommerce from "@/assets/project-ecommerce.jpg";
 
-const projects = [
-  {
-    title: "AI Marketing Analytics Platform",
-    description: "Plataforma SaaS de Marketing Analytics com IA, desenvolvida na Condati. Dashboard interativo com visualizações de dados em tempo real e insights automatizados.",
-    image: projectAnalytics,
-    technologies: ["React", "TypeScript", "Node.js", "D3.js", "PostgreSQL"],
-    liveUrl: "#",
-    githubUrl: null,
-    featured: true,
-  },
-  {
-    title: "Mortgage Application Platform",
-    description: "Sistema web para aplicações de financiamento imobiliário desenvolvido na Authority Partners. Fluxo completo de solicitação com calculadora de empréstimos.",
-    image: projectFintech,
-    technologies: [".NET Core", "Angular", "SQL Server", "Azure"],
-    liveUrl: "#",
-    githubUrl: null,
-    featured: true,
-  },
-  {
-    title: "Telecom Management System",
-    description: "Sistema de gestão para telecomunicações desenvolvido para MEO via DELLENT. Monitoramento de rede e gestão de clientes corporativos.",
-    image: projectTelecom,
-    technologies: ["C#", "ASP.NET", "Oracle", "React"],
-    liveUrl: "#",
-    githubUrl: null,
-    featured: false,
-  },
-  {
-    title: "E-commerce Admin Dashboard",
-    description: "Dashboard administrativo para e-commerce com gestão de produtos, pedidos e análise de vendas. Desenvolvido com stack moderna e responsivo.",
-    image: projectEcommerce,
-    technologies: ["React", "Redux", "Node.js", "MySQL"],
-    liveUrl: "#",
-    githubUrl: "#",
-    featured: false,
-  },
-];
-
 const Projects = () => {
+  const { t } = useLanguage();
+  
+  const projects = [
+    {
+      title: "AI Marketing Analytics Platform",
+      description: t.projects.descriptions.analytics,
+      image: projectAnalytics,
+      technologies: ["React", "TypeScript", "Node.js", "D3.js", "PostgreSQL"],
+      liveUrl: "#",
+      githubUrl: null,
+      featured: true,
+    },
+    {
+      title: "Mortgage Application Platform",
+      description: t.projects.descriptions.mortgage,
+      image: projectFintech,
+      technologies: [".NET Core", "Angular", "SQL Server", "Azure"],
+      liveUrl: "#",
+      githubUrl: null,
+      featured: true,
+    },
+    {
+      title: "Telecom Management System",
+      description: t.projects.descriptions.telecom,
+      image: projectTelecom,
+      technologies: ["C#", "ASP.NET", "Oracle", "React"],
+      liveUrl: "#",
+      githubUrl: null,
+      featured: false,
+    },
+    {
+      title: "E-commerce Admin Dashboard",
+      description: t.projects.descriptions.ecommerce,
+      image: projectEcommerce,
+      technologies: ["React", "Redux", "Node.js", "MySQL"],
+      liveUrl: "#",
+      githubUrl: "#",
+      featured: false,
+    },
+  ];
+
   return (
     <section id="projects" className="py-24 px-4 bg-gradient-card">
       <div className="max-w-6xl mx-auto">
@@ -58,10 +61,10 @@ const Projects = () => {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Meus <span className="text-gradient">Projetos</span>
+            {t.projects.title} <span className="text-gradient">{t.projects.titleHighlight}</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Uma seleção de projetos que demonstram minha experiência em desenvolvimento full stack.
+            {t.projects.subtitle}
           </p>
         </motion.div>
 
@@ -90,7 +93,7 @@ const Projects = () => {
                 {project.featured && (
                   <div className="absolute top-4 left-4">
                     <span className="px-3 py-1 text-xs font-medium bg-gradient-primary text-primary-foreground rounded-full">
-                      Destaque
+                      {t.projects.featured}
                     </span>
                   </div>
                 )}
@@ -126,7 +129,7 @@ const Projects = () => {
                   >
                     <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="mr-2 h-4 w-4" />
-                      Ver Projeto
+                      {t.projects.viewProject}
                     </a>
                   </Button>
                   
@@ -139,7 +142,7 @@ const Projects = () => {
                     >
                       <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                         <Github className="mr-2 h-4 w-4" />
-                        Código
+                        {t.projects.viewCode}
                       </a>
                     </Button>
                   )}
@@ -169,7 +172,7 @@ const Projects = () => {
             asChild
           >
             <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-              Ver mais projetos no GitHub
+              {t.projects.viewMore}
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
           </Button>

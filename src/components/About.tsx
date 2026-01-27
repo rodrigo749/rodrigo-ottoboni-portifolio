@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Briefcase, MapPin } from "lucide-react";
+import { useLanguage } from "@/hooks/useLanguage";
 
 const About = () => {
+  const { t } = useLanguage();
+  
   return (
     <section id="about" className="py-24 px-4">
       <div className="max-w-6xl mx-auto">
@@ -13,10 +16,10 @@ const About = () => {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Sobre <span className="text-gradient">Mim</span>
+            {t.about.title} <span className="text-gradient">{t.about.titleHighlight}</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Apaixonado por tecnologia e desenvolvimento de software, com foco em criar soluções elegantes e eficientes.
+            {t.about.subtitle}
           </p>
         </motion.div>
 
@@ -33,8 +36,8 @@ const About = () => {
                   <MapPin className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg mb-1">Localização</h3>
-                  <p className="text-muted-foreground">Brasil</p>
+                  <h3 className="font-semibold text-lg mb-1">{t.about.location}</h3>
+                  <p className="text-muted-foreground">{t.about.locationValue}</p>
                 </div>
               </div>
 
@@ -43,8 +46,8 @@ const About = () => {
                   <Briefcase className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg mb-1">Experiência</h3>
-                  <p className="text-muted-foreground">+10 anos em desenvolvimento de software</p>
+                  <h3 className="font-semibold text-lg mb-1">{t.about.experience}</h3>
+                  <p className="text-muted-foreground">{t.about.experienceValue}</p>
                 </div>
               </div>
 
@@ -53,11 +56,11 @@ const About = () => {
                   <GraduationCap className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg mb-1">Formação</h3>
+                  <h3 className="font-semibold text-lg mb-1">{t.about.education}</h3>
                   <p className="text-muted-foreground">
-                    Sistemas de Informação - PUC Minas
+                    {t.about.educationValue}
                     <br />
-                    Pós-graduação em Full Stack Web Dev
+                    {t.about.educationValue2}
                   </p>
                 </div>
               </div>
@@ -72,16 +75,10 @@ const About = () => {
           >
             <div className="glass rounded-2xl p-8">
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Sou um desenvolvedor Full Stack Senior com sólida experiência em desenvolvimento web, 
-                tendo trabalhado em diversos setores como Fintech, Marketing Analytics e Telecom.
+                {t.about.bio1}
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Ao longo da minha carreira, contribuí para o desenvolvimento de plataformas 
-                AI-powered, sistemas de mortgage, e soluções empresariais de grande escala.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Minha paixão está em criar código limpo, escalável e em aprender constantemente 
-                novas tecnologias para entregar as melhores soluções possíveis.
+                {t.about.bio2}
               </p>
             </div>
           </motion.div>

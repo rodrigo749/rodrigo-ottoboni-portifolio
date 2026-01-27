@@ -1,19 +1,21 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const navItems = [
-  { label: "Sobre", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projetos", href: "#projects" },
-  { label: "Experiência", href: "#experience" },
-  { label: "Contato", href: "#contact" },
-];
+import { useLanguage } from "@/hooks/useLanguage";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
+
+  const navItems = [
+    { label: t.nav.about, href: "#about" },
+    { label: t.nav.skills, href: "#skills" },
+    { label: t.nav.projects, href: "#projects" },
+    { label: t.nav.experience, href: "#experience" },
+    { label: t.nav.contact, href: "#contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +29,10 @@ const Header = () => {
     const element = document.querySelector(href);
     element?.scrollIntoView({ behavior: "smooth" });
     setIsMobileMenuOpen(false);
+  };
+
+  const toggleLanguage = () => {
+    setLanguage(language === "pt" ? "en" : "pt");
   };
 
   return (
@@ -55,21 +61,41 @@ const Header = () => {
             </button>
           ))}
           <Button
+            variant="ghost"
+            size="sm"
+            onClick={toggleLanguage}
+            className="flex items-center gap-2 hover:bg-secondary"
+          >
+            <Globe className="h-4 w-4" />
+            <span className="font-medium">{language === "pt" ? "EN" : "PT"}</span>
+          </Button>
+          <Button
             size="sm"
             className="bg-gradient-primary hover:opacity-90 transition-opacity"
             onClick={() => scrollToSection("#contact")}
           >
-            Contato
+            {t.nav.contact}
           </Button>
         </nav>
 
         {/* Mobile menu button */}
-        <button
-          className="md:hidden p-2"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="md:hidden flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={toggleLanguage}
+            className="flex items-center gap-1 hover:bg-secondary"
+          >
+            <Globe className="h-4 w-4" />
+            <span className="text-xs font-medium">{language === "pt" ? "EN" : "PT"}</span>
+          </Button>
+          <button
+            className="p-2"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}

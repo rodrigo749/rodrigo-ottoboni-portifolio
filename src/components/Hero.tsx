@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/hooks/useLanguage";
 
 const Hero = () => {
+  const { t } = useLanguage();
+  
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
       {/* Background effects */}
@@ -21,7 +24,7 @@ const Hero = () => {
           transition={{ duration: 0.6 }}
         >
           <span className="inline-block px-4 py-2 rounded-full glass text-sm text-muted-foreground mb-6">
-            Desenvolvedor Full Stack
+            {t.hero.badge}
           </span>
         </motion.div>
 
@@ -41,8 +44,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Senior Full Stack Developer com mais de 10 anos de experiência construindo 
-          soluções web escaláveis e inovadoras. Especialista em React, Node.js e .NET.
+          {t.hero.description}
         </motion.p>
 
         <motion.div
@@ -57,7 +59,7 @@ const Hero = () => {
             onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
           >
             <Mail className="mr-2 h-4 w-4" />
-            Entre em contato
+            {t.hero.contactBtn}
           </Button>
           <Button
             variant="outline"
@@ -65,7 +67,7 @@ const Hero = () => {
             className="border-border hover:bg-secondary"
             onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
           >
-            Saiba mais
+            {t.hero.learnMoreBtn}
           </Button>
         </motion.div>
 

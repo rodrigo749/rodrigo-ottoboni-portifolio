@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/hooks/useLanguage";
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
@@ -26,6 +27,7 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -39,8 +41,8 @@ const Contact = () => {
     
     if (!formData.name || !formData.email || !formData.message) {
       toast({
-        title: "Campos obrigatórios",
-        description: "Por favor, preencha todos os campos obrigatórios.",
+        title: t.contact.form.required,
+        description: t.contact.form.requiredDesc,
         variant: "destructive",
       });
       return;
@@ -59,8 +61,8 @@ const Contact = () => {
       setFormData({ name: "", email: "", subject: "", message: "" });
       
       toast({
-        title: "Mensagem enviada!",
-        description: "Obrigado pelo contato. Responderei em breve!",
+        title: t.contact.form.success,
+        description: t.contact.form.successDesc,
       });
 
       // Reset success state after 3 seconds
@@ -68,8 +70,8 @@ const Contact = () => {
     } catch (error) {
       console.error("Error sending message:", error);
       toast({
-        title: "Erro ao enviar",
-        description: "Ocorreu um erro ao enviar sua mensagem. Tente novamente.",
+        title: t.contact.form.error,
+        description: t.contact.form.errorDesc,
         variant: "destructive",
       });
     } finally {
@@ -87,11 +89,10 @@ const Contact = () => {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Vamos <span className="text-gradient">Conversar</span>
+            {t.contact.title} <span className="text-gradient">{t.contact.titleHighlight}</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Estou sempre aberto a novas oportunidades e projetos interessantes. 
-            Entre em contato para discutirmos como posso ajudar.
+            {t.contact.subtitle}
           </p>
         </motion.div>
 
@@ -110,8 +111,8 @@ const Contact = () => {
               <div className="p-4 rounded-full bg-gradient-primary glow-primary mb-4">
                 <Mail className="h-6 w-6 text-primary-foreground" />
               </div>
-              <h3 className="font-semibold mb-1">Email</h3>
-              <p className="text-sm text-muted-foreground text-center">Envie uma mensagem</p>
+              <h3 className="font-semibold mb-1">{t.contact.emailLabel}</h3>
+              <p className="text-sm text-muted-foreground text-center">{t.contact.emailDesc}</p>
             </a>
 
             <a
@@ -123,8 +124,8 @@ const Contact = () => {
               <div className="p-4 rounded-full bg-gradient-primary glow-primary mb-4">
                 <Linkedin className="h-6 w-6 text-primary-foreground" />
               </div>
-              <h3 className="font-semibold mb-1">LinkedIn</h3>
-              <p className="text-sm text-muted-foreground text-center">Vamos nos conectar</p>
+              <h3 className="font-semibold mb-1">{t.contact.linkedinLabel}</h3>
+              <p className="text-sm text-muted-foreground text-center">{t.contact.linkedinDesc}</p>
             </a>
 
             <a
@@ -136,8 +137,8 @@ const Contact = () => {
               <div className="p-4 rounded-full bg-gradient-primary glow-primary mb-4">
                 <Github className="h-6 w-6 text-primary-foreground" />
               </div>
-              <h3 className="font-semibold mb-1">GitHub</h3>
-              <p className="text-sm text-muted-foreground text-center">Veja meus projetos</p>
+              <h3 className="font-semibold mb-1">{t.contact.githubLabel}</h3>
+              <p className="text-sm text-muted-foreground text-center">{t.contact.githubDesc}</p>
             </a>
           </div>
 
@@ -145,11 +146,11 @@ const Contact = () => {
           <form onSubmit={handleSubmit} className="mt-10 space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="name">Nome *</Label>
+                <Label htmlFor="name">{t.contact.form.name} *</Label>
                 <Input
                   id="name"
                   name="name"
-                  placeholder="Seu nome"
+                  placeholder={t.contact.form.namePlaceholder}
                   value={formData.name}
                   onChange={handleInputChange}
                   disabled={isSubmitting}
@@ -157,12 +158,12 @@ const Contact = () => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email">Email *</Label>
+                <Label htmlFor="email">{t.contact.form.email} *</Label>
                 <Input
                   id="email"
                   name="email"
                   type="email"
-                  placeholder="seu@email.com"
+                  placeholder={t.contact.form.emailPlaceholder}
                   value={formData.email}
                   onChange={handleInputChange}
                   disabled={isSubmitting}
@@ -172,11 +173,11 @@ const Contact = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="subject">Assunto</Label>
+              <Label htmlFor="subject">{t.contact.form.subject}</Label>
               <Input
                 id="subject"
                 name="subject"
-                placeholder="Qual o assunto?"
+                placeholder={t.contact.form.subjectPlaceholder}
                 value={formData.subject}
                 onChange={handleInputChange}
                 disabled={isSubmitting}
@@ -185,11 +186,11 @@ const Contact = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="message">Mensagem *</Label>
+              <Label htmlFor="message">{t.contact.form.message} *</Label>
               <Textarea
                 id="message"
                 name="message"
-                placeholder="Escreva sua mensagem aqui..."
+                placeholder={t.contact.form.messagePlaceholder}
                 rows={5}
                 value={formData.message}
                 onChange={handleInputChange}
@@ -208,17 +209,17 @@ const Contact = () => {
                 {isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Enviando...
+                    {t.contact.form.sending}
                   </>
                 ) : isSubmitted ? (
                   <>
                     <CheckCircle className="mr-2 h-4 w-4" />
-                    Enviado!
+                    {t.contact.form.sent}
                   </>
                 ) : (
                   <>
                     <Send className="mr-2 h-4 w-4" />
-                    Enviar mensagem
+                    {t.contact.form.submit}
                   </>
                 )}
               </Button>

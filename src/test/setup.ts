@@ -1,15 +1,4 @@
 import "@testing-library/jest-dom";
-
-Object.defineProperty(window, "matchMedia", {
-  writable: true,
-  value: (query: string) => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: () => {},
-    removeListener: () => {},
-    addEventListener: () => {},
-    removeEventListener: () => {},
-    dispatchEvent: () => {},
-  }),
-});
+// Esse arquivo roda antes de cada teste
+// O @testing-library/jest-dom adiciona matchers como:
+// toBeInTheDocument(), toHaveTextContent(), toBeVisible(), etc.

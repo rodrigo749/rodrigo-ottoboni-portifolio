@@ -1,6 +1,6 @@
 # Rodrigo Ottoboni Dias — Portfolio
 
-Portfolio pessoal desenvolvido com React e TypeScript, apresentando experiências profissionais, habilidades técnicas e informações de contato.
+🌐 **Acesse a aplicação:** [https://rodrigo-ottoboni.vercel.app/](https://rodrigo-ottoboni.vercel.app/)
 
 ---
 
